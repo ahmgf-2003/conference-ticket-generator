@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <!-- displays site properly based on user's device -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./assets/images/favicon-32x32.png"
+        />
+        <!-- Render all elements normally -->
+        <link rel="stylesheet" href="assets/css/normalize.css" />
+        <!-- Main CSS file -->
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <title>Conference ticket generator</title>
+        <!-- Main JS file -->
+        <script src="assets/js/main.js" defer></script>
+    </head>
+    <body>
+        <!-- Start background dahsed lines -->
+        <div class="dahsed-lines">
+            <img src="assets/images/pattern-lines.svg" />
+        </div>
+        <!-- End background dahsed lines -->
+        <!-- Start header -->
+        <header id="header" class="header">
+            <div class="container">
+                <img
+                    src="assets/images/logo-full.svg"
+                    decoding="async"
+                    alt="logo"
+                />
+                <h1>Your Journey to Coding Conf 2025 Starts Here!</h1>
+                <p>
+                    Secure your spot at next year's biggest coding conference.
+                </p>
+            </div>
+        </header>
+        <!-- End header -->
+        <section id="form" class="form">
+            <div class="container">
+                <form>
+                    <div class="form-input-image">
+                        <label for="img"> Upload Avatar </label>
+                        <div class="image-input">
+                            <img
+                                src="assets/images/icon-upload.svg"
+                                decoding="async"
+                                alt="Upload icon"
+                            />
+                            Drag and drop or click to upload
+                            <input id="img" type="file" name="user-img" />
+                        </div>
+                        <span class="note">
+                            Upload your photo (JPG or PNG, max size: 500KB).
+                        </span>
+                    </div>
+                    <div class="form-input">
+                        <label for="name"> Full Name </label>
+                        <input id="name" type="text" name="user-name" />
+                    </div>
+                    <div class="form-input">
+                        <label for="email"> Email Address </label>
+                        <input
+                            id="email"
+                            type="email"
+                            name="user-email"
+                            placeholder="example@email.com"
+                        />
+                    </div>
+                    <div class="form-input">
+                        <label for="github"> GitHub Username </label>
+                        <input
+                            id="github"
+                            type="email"
+                            name="user-github"
+                            placeholder="@yourusername"
+                        />
+                    </div>
+                    <div class="form-submit">
+                        <input type="submit" value="Generate My Ticket" />
+                    </div>
+                </form>
+            </div>
+        </section>
+        <!-- 
+            Congrats, {Full Name}! Your ticket is ready.
+
+            We've emailed your ticket to {Email Address} and will send updates in the run up to the event.
+
+            Coding Conf
+            Jan 31, 2025 / Austin, TX 
+        -->
+    </body>
+</html>
