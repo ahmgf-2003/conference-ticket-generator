@@ -19,11 +19,16 @@
         <script src="assets/js/main.js" defer></script>
     </head>
     <body>
-        <!-- Start background dahsed lines -->
-        <div class="dahsed-lines">
-            <img src="assets/images/pattern-lines.svg" />
+        <!-- Start background images -->
+        <div class="background-images">
+            <img class="pattern lines" src="assets/images/pattern-lines.svg" />
+            <img class="pattern line-top" src="assets/images/pattern-squiggly-line-top.svg" />
+            <picture class="pattern line-bottom">
+                <source media="(min-width: 992px)" srcset="assets/images/pattern-squiggly-line-bottom-desktop.svg" />
+                <img src="assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg" />
+            </picture>
         </div>
-        <!-- End background dahsed lines -->
+        <!-- End background images -->
         <!-- Start header -->
         <header id="header" class="header">
             <div class="container">
@@ -41,7 +46,7 @@
         <!-- End header -->
         <section id="form" class="form">
             <div class="container">
-                <form>
+                <form method="post" enctype="multipart/form-data">
                     <div class="form-input-image">
                         <label for="img"> Upload Avatar </label>
                         <div class="image-input">
@@ -50,8 +55,12 @@
                                 decoding="async"
                                 alt="Upload icon"
                             />
-                            Drag and drop or click to upload
+                            <span>Drag and drop or click to upload</span>
                             <input id="img" type="file" name="user-img" />
+                            <div class="buttons hidden">
+                                <button>Remove image</button>
+                                <button>Change image</button>
+                            </div>
                         </div>
                         <span class="note">
                             Upload your photo (JPG or PNG, max size: 500KB).
@@ -74,7 +83,7 @@
                         <label for="github"> GitHub Username </label>
                         <input
                             id="github"
-                            type="email"
+                            type="text"
                             name="user-github"
                             placeholder="@yourusername"
                         />
