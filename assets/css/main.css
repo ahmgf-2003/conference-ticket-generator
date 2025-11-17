@@ -31,6 +31,7 @@ body {
     color: white;
     background-image: url("../images/background-mobile.png");
     background-size: cover;
+    position: relative;
 }
 @media (min-width: 768px) {
     body {
@@ -68,16 +69,44 @@ body {
 }
 /* End global rules */
 
-/* Start dashed lines */
-.dahsed-lines {
+/* Start background images */
+.background-images {
     position: absolute;
+    min-height: 100%;
+    width: 100%;
     z-index: 1;
 }
-.dahsed-lines img {
+.background-images .pattern {
+    position: absolute;
     width: 100%;
-    height: 100vh;
 }
-/* End dashed lines */
+.background-images .pattern.lines {
+    height: 100vh;
+    left: 0;
+    top: -10px;
+}
+.background-images .pattern.line-top {
+    right: 0;
+    top: 30px;
+    max-width: fit-content;
+}
+.background-images .pattern.line-bottom {
+    left: 0;
+    bottom: 0;
+    max-width: 350px;
+}
+.background-images .pattern.line-bottom img {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+@media (min-width: 992px) {
+    .background-images .pattern.line-bottom {
+        max-width: 650px;
+    }
+}
+/* End background images */
 
 /* Start header */
 header {
@@ -90,6 +119,11 @@ header .container {
 header h1 {
     font-size: 1.5em;
     margin: 35px 0 15px;
+}
+@media (min-width: 992px) {
+    header h1 {
+        font-size: 2em;
+    }
 }
 header p {
     font-size: 0.9em;
@@ -104,7 +138,10 @@ header p {
     position: relative;
     z-index: 2;
 }
-.form .form-input {
+.form .container {
+    max-width: 450px;
+}
+.form [class*="form-input"] {
     position: relative;
     margin-bottom: 30px;
 }
@@ -116,6 +153,7 @@ header p {
 .form .image-input,
 .form .form-input > input,
 .form .image-input img {
+    color: var(--Neutral-300);
     background-color: rgb(255 255 255 / 0.1);
     backdrop-filter: blur(2px);
 }
@@ -139,6 +177,7 @@ header p {
 }
 .form .image-input img {
     display: block;
+    max-width: 150px;
     margin: 0 auto 20px;
     padding: 10px;
     background-color: rgb(255 255 255 / 0.1);
@@ -153,6 +192,9 @@ header p {
     top: 0;
     opacity: 0;
     cursor: pointer;
+}
+.form .image-input .hidden {
+    display: none;
 }
 .form .note {
     font-size: 0.6em;
@@ -190,5 +232,9 @@ form .form-submit input {
     font-weight: 800;
     border: none;
     cursor: pointer;
+    transition: background-color .3s
+}
+form .form-submit input:hover {
+    background-color: var(--Orange-700);
 }
 /* End form section */
