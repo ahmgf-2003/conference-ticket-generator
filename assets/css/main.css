@@ -7,6 +7,7 @@
     --Orange-500: hsl(7, 88%, 67%);
     --Orange-700: hsl(7, 71%, 60%);
     --gradient: hsl(7, 86%, 67%) to hsl(0, 0%, 100%);
+    --error-red: #a6192e;
 }
 /* End variables */
 
@@ -68,6 +69,15 @@ body {
     }
 }
 /* End global rules */
+
+/* Start components */
+.hidden {
+    display: none;
+}
+.error {
+    color: var(--error-red) !important;
+}
+/* End components */
 
 /* Start background images */
 .background-images {
@@ -193,18 +203,29 @@ header p {
     opacity: 0;
     cursor: pointer;
 }
-.form .image-input .hidden {
-    display: none;
+.form .image-input .buttons button {
+    background-color: rgb(255 255 255 / 0.1);
+    color: var(--Neutral-300);
+    padding: 5px 9px;
+    font-size: 0.85em;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    position: relative;
+}
+.form .image-input .buttons button:first-child {
+    text-decoration: underline var(--Neutral-500) 1.5px;
 }
 .form .note {
     font-size: 0.6em;
     color: var(--Neutral-500);
 }
-.form .note::before {
-    content: url("../images/icon-info.svg");
-    position: relative;
+.form .note svg {
     margin-right: 5px;
     vertical-align: middle;
+}
+.form .note.error svg path {
+    stroke: var(--error-red);
 }
 .form .form-input > input,
 .form .form-submit > input {
@@ -232,7 +253,7 @@ form .form-submit input {
     font-weight: 800;
     border: none;
     cursor: pointer;
-    transition: background-color .3s
+    transition: background-color 0.3s;
 }
 form .form-submit input:hover {
     background-color: var(--Orange-700);
