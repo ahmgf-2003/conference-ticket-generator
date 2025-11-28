@@ -1,8 +1,36 @@
-window.addEventListener("popstate", () => {
-    console.log(location.pathname)
-    history.pushState({}, "", "/")
-    location.reload();
-})
+// Single page render 
+function changeUI(element = document.querySelector("#ticket")) {
+    // hide all unwanted elements
+    document.querySelectorAll("body > *[id]").forEach(section => {
+        section.classList.add("hidden")
+    })
+
+    // display selected UI for user
+    element.classList.remove("hidden");
+
+    // get header heaing and subheading
+    const heading = document.querySelector(".header h1"),
+        subHeading = document.querySelector(".header p");
+
+    // update header if element has ticket id
+    if (element.id === "ticket") {
+        const userData = JSON.parse(localStorage.getItem("ticket-data"));
+
+        heading.classList.add("ticket");
+
+        let firstName = userData.name.split(" ")[0],
+            lastName = userData.name.split(" ")[1];
+
+        heading.innerHTML = `
+            Congrats, <span>${firstName}</span> <span>${lastName}</span>! Your ticket is ready.
+        `
+        subHeading.textContent = `
+            We've emailed your ticket to ${userData.email} and will send updates in the run up to the event.
+        `
+}
+}
+
+changeUI();
 
 // Get file input & img element, img drag text span, buttons div and note span in file input
 const file = document.getElementById("img"),
@@ -74,6 +102,14 @@ inputImgButtons[1].addEventListener("click", (e) => {
 // Get Form Element
 const form = document.forms[0];
 
+document.querySelectorAll(".form-input input").forEach(input => {
+    input.onchange = () => {
+        if(input.parentElement.querySelector(".note")) {
+            input.parentElement.querySelector(".note").remove()
+        }
+    }
+})
+
 // check form input on submit (valdation)
 form.addEventListener("submit", (e) => {
     let submit = true;
@@ -81,40 +117,76 @@ form.addEventListener("submit", (e) => {
 
     const formData = new FormData(form);
     const userImg = formData.get("user-img");
+    const userName = formData.get("user-name");
+    const userEmail = formData.get("user-email");
+    const userGithub = formData.get("user-github");
+
     // Check the user uploaded an image
     if (userImg.size === 0) {
-        Error("whattt!!!");
-        imgNote.textContent = "Upload a image first";
-        imgNote.prepend(icon);
-        imgNote.classList.add("error");
+        console.error("Error: Please upload your image");
+        updateNote(imgNote, "Upload a image first")
         submit = false;
     }
 
-    if (submit) {
-        history.pushState({}, "", "/genrated-ticket")
-    }
-
-    const userName = formData.get("user-name");
     // Check user typed his name & word are more than 2 with length more than 3 for each
     let userNameArr = userName.split(" ");
-    if (
-        userNameArr.length < 2 ||
-        userNameArr[0].length < 3 ||
-        userNameArr[1].length < 3
-    ) {
-        Error("whattt!!!")
+    if (userNameArr.length < 2 || userNameArr[0].length < 3 || userNameArr[1].length < 3) {
+        console.error("Error: Please type your name correctly");
+        updateNote(
+            imgNote.cloneNode(false), 
+            "Please type your first & last name", 
+            document.querySelector("#name").parentElement
+        );
+        submit = false;
     }
 
-    const userEmail = formData.get("user-email");
     // Check if email is valid
     if (!(/\w+@\w+\.\w/g).test(userEmail)) {
-        Error("what form email")
+        console.error("Error: Please type your email correctly");
+        updateNote(
+            imgNote.cloneNode(false), 
+            "Please type a valid email", 
+            document.querySelector("#email").parentElement
+        );
+        submit = false;
     }
 
-    const userGithub = formData.get("user-github");
     // Check user github name is valid github user
     if (!userGithub) {
-        Error("what form github")
+        console.error("Error: Please type your github username correctly");
+        updateNote(
+            imgNote.cloneNode(false), 
+            "Type your github username", 
+            document.querySelector("#github").parentElement
+        );
+        submit = false;
     }
     let githubUsername = userGithub.split("@").slice(-1).join("");
+
+    if (submit) {
+        localStorage.setItem("ticket-data", JSON.stringify({
+            image: img.src /* the display img src after reading the img user uploaded line 39 */,
+            name: userName,
+            email: userEmail,
+            github: userGithub
+        }));
+
+        changeUI("#ticket");
+    }
 });
+
+
+// Create or edit existed note element
+function updateNote(note, text, parent) {
+    note.textContent = text;
+    note.classList.add("error");
+    note.prepend(icon.cloneNode(true));
+
+    if (parent) {
+        if (parent.querySelector(".note")) {
+            parent.querySelector(".note").remove();
+        }
+
+        parent.append(note);
+    }
+} 

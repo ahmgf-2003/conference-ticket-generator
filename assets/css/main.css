@@ -6,7 +6,6 @@
     --Neutral-900: hsl(248, 70%, 10%);
     --Orange-500: hsl(7, 88%, 67%);
     --Orange-700: hsl(7, 71%, 60%);
-    --gradient: hsl(7, 86%, 67%) to hsl(0, 0%, 100%);
     --error-red: #a6192e;
 }
 /* End variables */
@@ -28,6 +27,7 @@
 }
 body {
     font-family: Inconsolata;
+    min-height: 100vh;
     font-size: 20px;
     color: white;
     background-image: url("../images/background-mobile.png");
@@ -130,6 +130,16 @@ header h1 {
     font-size: 1.5em;
     margin: 35px 0 15px;
 }
+header h1.ticket {
+    font-size: 2em;
+}
+header h1 span {
+    background: linear-gradient(to right, var(--Orange-500), white);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
 @media (min-width: 992px) {
     header h1 {
         font-size: 2em;
@@ -212,6 +222,7 @@ header p {
     border: none;
     outline: none;
     position: relative;
+    cursor: pointer;
 }
 .form .image-input .buttons button:first-child {
     text-decoration: underline var(--Neutral-500) 1.5px;
@@ -244,7 +255,7 @@ header p {
     width: calc(100% + 10px);
     height: 58px;
     border: 1.5px solid var(--Neutral-500);
-    bottom: -5px;
+    top: 25px;
     left: -5px;
     border-radius: 16px;
 }
