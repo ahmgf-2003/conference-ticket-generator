@@ -77,6 +77,16 @@ body {
 .error {
     color: var(--error-red) !important;
 }
+.btn {
+    background-color: var(--Orange-500);
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn:hover {
+    background-color: var(--Orange-700);
+}
 /* End components */
 
 /* Start background images */
@@ -150,6 +160,9 @@ header p {
     margin: 0;
     color: var(--Neutral-300);
 }
+header p span {
+    color: var(--Orange-500);
+}
 /* End header */
 
 /* Start form section */
@@ -176,6 +189,7 @@ header p {
     color: var(--Neutral-300);
     background-color: rgb(255 255 255 / 0.1);
     backdrop-filter: blur(2px);
+    transition: background-color 0.3s;
 }
 .form .image-input {
     position: relative;
@@ -184,6 +198,10 @@ header p {
     color: var(--Neutral-300);
     border: 2px dashed var(--Neutral-500);
     border-radius: 9px;
+}
+.form .image-input:hover,
+.form .form-input > input:hover {
+    background-color: rgb(210 209 214 / 25%)
 }
 .form-input-image:focus-within .image-input::before {
     content: "";
@@ -259,14 +277,83 @@ header p {
     left: -5px;
     border-radius: 16px;
 }
-form .form-submit input {
-    background-color: var(--Orange-500);
-    font-weight: 800;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-form .form-submit input:hover {
-    background-color: var(--Orange-700);
-}
 /* End form section */
+
+/* Start ticket section */
+.ticket {
+    margin-top: 30px;
+    position: relative;
+    z-index: 999;
+}
+.ticket .container {
+    max-width: 400px;
+}
+.ticket .ticket-card {
+    background-image: url("../images/pattern-ticket.svg");
+    background-size: 100% 100%;
+    padding: 20px;
+}
+.ticket-heading {
+    margin-bottom: 15px;
+    position: relative;
+}
+.ticket .ticket-heading::after {
+    content: "#01609";
+    position: absolute;
+    font-size: 1.8em;
+    color: var(--Neutral-300);
+    opacity: 0.3;
+    writing-mode: vertical-lr;
+    top: 13px;
+    right: -10px;
+}
+.ticket .ticket-heading h2 {
+    display: flex;
+    align-items: center;
+    gap: 0 15px;
+    margin: 0;
+    font-size: 1.3em;
+}
+.ticket .ticket-heading img {
+    width: 40px;
+}
+.ticket .ticket-heading p {
+    margin: 3px 0 0 55px;
+    color: var(--Neutral-300);
+    font-size: 0.9em;
+}
+.ticket figure {
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+    margin: 0;
+}
+.ticket figure img {
+    width: 55px;
+    height: 55px;
+    border-radius: 6px;
+}
+.ticket figcaption h3 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+.ticket figcaption p {
+    margin: 5px 0 0;
+    font-size: 0.8em;
+    color: var(--Neutral-300);
+}
+.ticket figcaption p::before {
+    content: url("../images/icon-github.svg");
+    position: relative;
+    vertical-align: middle;
+}
+.ticket .btn {
+    display: block;
+    width: 85%;
+    padding: 12px;
+    margin: 30px auto 0;
+    outline: none;
+    border-radius: 8px;
+}
+/* End ticket section */

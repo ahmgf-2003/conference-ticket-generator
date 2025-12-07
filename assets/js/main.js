@@ -1,9 +1,9 @@
-// Single page render 
-function changeUI(element = document.querySelector("#ticket")) {
+// Single page render
+function changeUI(element = document.querySelector("#form")) {
     // hide all unwanted elements
-    document.querySelectorAll("body > *[id]").forEach(section => {
-        section.classList.add("hidden")
-    })
+    document.querySelectorAll("body > *[id]").forEach((section) => {
+        section.classList.add("hidden");
+    });
 
     // display selected UI for user
     element.classList.remove("hidden");
@@ -23,15 +23,27 @@ function changeUI(element = document.querySelector("#ticket")) {
 
         heading.innerHTML = `
             Congrats, <span>${firstName}</span> <span>${lastName}</span>! Your ticket is ready.
+        `;
+        subHeading.innerHTML = `
+            We've emailed your ticket to <span>${userData.email}</span> and will send updates in the run up to the event.
+        `;
+        
+        updateTicket({name, image, github } = userData);
+    } else {
+        heading.innerHTML = `
+            Your Journey to Coding Conf 2025 Starts Here!
+        `;
+        subHeading.innerHTML = `
+            Secure your spot at next year's biggest coding conference.
         `
-        subHeading.textContent = `
-            We've emailed your ticket to ${userData.email} and will send updates in the run up to the event.
-        `
-}
+    }
 }
 
-changeUI();
-
+if (localStorage.getItem("ticket-data")) {
+    changeUI(document.querySelector("#ticket"));
+} else {
+    changeUI();
+}
 // Get file input & img element, img drag text span, buttons div and note span in file input
 const file = document.getElementById("img"),
     img = document.querySelector(".form-input-image img"),
@@ -63,7 +75,8 @@ file.addEventListener("change", (e) => {
     } else if (!image.type.match(/image\/png|jpeg/)) {
         e.target.value = null;
         imgNote.classList.add("error");
-        imgNote.textContent = "file should be an image with jpg/png format only";
+        imgNote.textContent =
+            "file should be an image with jpg/png format only";
         imgNote.prepend(icon);
         throw new Error("file should be png or jpg image only");
     }
@@ -102,13 +115,13 @@ inputImgButtons[1].addEventListener("click", (e) => {
 // Get Form Element
 const form = document.forms[0];
 
-document.querySelectorAll(".form-input input").forEach(input => {
+document.querySelectorAll(".form-input input").forEach((input) => {
     input.onchange = () => {
-        if(input.parentElement.querySelector(".note")) {
-            input.parentElement.querySelector(".note").remove()
+        if (input.parentElement.querySelector(".note")) {
+            input.parentElement.querySelector(".note").remove();
         }
-    }
-})
+    };
+});
 
 // check form input on submit (valdation)
 form.addEventListener("submit", (e) => {
@@ -124,28 +137,32 @@ form.addEventListener("submit", (e) => {
     // Check the user uploaded an image
     if (userImg.size === 0) {
         console.error("Error: Please upload your image");
-        updateNote(imgNote, "Upload a image first")
+        updateNote(imgNote, "Upload a image first");
         submit = false;
     }
 
     // Check user typed his name & word are more than 2 with length more than 3 for each
     let userNameArr = userName.split(" ");
-    if (userNameArr.length < 2 || userNameArr[0].length < 3 || userNameArr[1].length < 3) {
+    if (
+        userNameArr.length < 2 ||
+        userNameArr[0].length < 3 ||
+        userNameArr[1].length < 3
+    ) {
         console.error("Error: Please type your name correctly");
         updateNote(
-            imgNote.cloneNode(false), 
-            "Please type your first & last name", 
+            imgNote.cloneNode(false),
+            "Please type your first & last name",
             document.querySelector("#name").parentElement
         );
         submit = false;
     }
 
     // Check if email is valid
-    if (!(/\w+@\w+\.\w/g).test(userEmail)) {
+    if (!/\w+@\w+\.\w/g.test(userEmail)) {
         console.error("Error: Please type your email correctly");
         updateNote(
-            imgNote.cloneNode(false), 
-            "Please type a valid email", 
+            imgNote.cloneNode(false),
+            "Please type a valid email",
             document.querySelector("#email").parentElement
         );
         submit = false;
@@ -155,8 +172,8 @@ form.addEventListener("submit", (e) => {
     if (!userGithub) {
         console.error("Error: Please type your github username correctly");
         updateNote(
-            imgNote.cloneNode(false), 
-            "Type your github username", 
+            imgNote.cloneNode(false),
+            "Type your github username",
             document.querySelector("#github").parentElement
         );
         submit = false;
@@ -164,17 +181,30 @@ form.addEventListener("submit", (e) => {
     let githubUsername = userGithub.split("@").slice(-1).join("");
 
     if (submit) {
-        localStorage.setItem("ticket-data", JSON.stringify({
-            image: img.src /* the display img src after reading the img user uploaded line 39 */,
-            name: userName,
-            email: userEmail,
-            github: userGithub
-        }));
+        localStorage.setItem(
+            "ticket-data",
+            JSON.stringify({
+                image: img.src /* the display img src after reading the img user uploaded line 39 */,
+                name: userName,
+                email: userEmail,
+                github: githubUsername,
+            })
+        );
 
-        changeUI("#ticket");
+        changeUI(document.querySelector("#ticket"));
+        form.reset();
+        // Change the src of the upload file input image to default image
+        img.src = "assets/images/icon-upload.svg";
+        buttons.classList.add("hidden");
+        span.classList.remove("hidden")
     }
 });
 
+// Genrate new ticket 
+document.querySelector(".ticket button").addEventListener("click", () => {
+    changeUI(document.querySelector("#form"));
+    localStorage.removeItem("ticket-data")
+})
 
 // Create or edit existed note element
 function updateNote(note, text, parent) {
@@ -189,4 +219,21 @@ function updateNote(note, text, parent) {
 
         parent.append(note);
     }
-} 
+}
+
+// Change ticket user info based on data
+function updateTicket(user) {
+    // Get the elements wher data will be displayed
+    const subHeading = document.querySelector(".ticket .ticket-heading p"),
+        userImage = document.querySelector(".ticket figure img"),
+        userName = document.querySelector(".ticket figcaption h3"),
+        userGithub = document.querySelector(".ticket figcaption p"),
+        months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const date = new Date(`${new Date().getFullYear() + 1}`);
+
+    subHeading.innerHTML = `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()} / Online`;
+    userImage.src = user.image;
+    userName.textContent = user.name;
+    userGithub.textContent = "@" + user.github;
+}

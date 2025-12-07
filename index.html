@@ -44,7 +44,7 @@
             </div>
         </header>
         <!-- End header -->
-        <section id="form" class="form">
+        <section id="form" class="form hidden">
             <div class="container">
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-input-image">
@@ -113,23 +113,35 @@
                         />
                     </div>
                     <div class="form-submit">
-                        <input type="submit" value="Generate My Ticket" />
+                        <input class="btn" type="submit" value="Generate My Ticket" />
                     </div>
                 </form>
             </div>
         </section>
-        <section id="ticket" class="ticket">
+        <section id="ticket" class="ticket hidden">
             <div class="container">
-                
+                <div class="ticket-card">
+                    <div class="ticket-heading">
+                        <h2>
+                            <img src="assets/images/logo-mark.svg" alt="logo" />
+                            Coding Conf
+                        </h2>
+                        <p>Jan 31, 2025 / Online</p>
+                    </div>
+                    <div class="ticket-user-info">
+                        <figure>
+                            <img alt="Ticket user" />
+                            <figcaption>
+                                <h3></h3>
+                                <p></p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <button class="btn">
+                    generate new ticket
+                </button>
             </div>
         </section>
-        <!-- 
-            Congrats, {Full Name}! Your ticket is ready.
-
-            We've emailed your ticket to {Email Address} and will send updates in the run up to the event.
-
-            Coding Conf
-            Jan 31, 2025 / Austin, TX 
-        -->
     </body>
 </html>
