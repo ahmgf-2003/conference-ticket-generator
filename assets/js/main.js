@@ -69,7 +69,7 @@ file.addEventListener("change", (e) => {
     if (image.size > 3 * 1024 *  1024) {
         e.target.value = null;
         imgNote.classList.add("error");
-        imgNote.textContent = "Image size should be less than 500KB";
+        imgNote.textContent = "Image size should be less than 3MB";
         imgNote.prepend(icon);
         throw new Error("Big file size");
     } else if (!image.type.match(/image\/png|jpeg/)) {
