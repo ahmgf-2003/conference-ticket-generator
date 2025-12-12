@@ -65,8 +65,8 @@ file.addEventListener("change", (e) => {
     let image = e.target.files[0],
         reader = new FileReader();
 
-    // make sure image is less than 500KB and format is jpg or png
-    if (image.size > 500 * 1000) {
+    // make sure image is less than 3MB and format is jpg or png
+    if (image.size > 3 * 1024 *  1024) {
         e.target.value = null;
         imgNote.classList.add("error");
         imgNote.textContent = "Image size should be less than 500KB";

@@ -26,7 +26,7 @@
     box-sizing: border-box;
 }
 body {
-    font-family: Inconsolata;
+    font-family: Inconsolata, Arial;
     min-height: 100vh;
     font-size: 20px;
     color: white;
@@ -201,7 +201,7 @@ header p span {
 }
 .form .image-input:hover,
 .form .form-input > input:hover {
-    background-color: rgb(210 209 214 / 25%)
+    background-color: rgb(210 209 214 / 25%);
 }
 .form-input-image:focus-within .image-input::before {
     content: "";
@@ -293,9 +293,25 @@ header p span {
     background-size: 100% 100%;
     padding: 20px;
 }
+@media (min-width: 768px) {
+    .ticket .container {
+        max-width: 600px;
+    }
+    .ticket .ticket-card {
+        display: flex;
+        flex-direction: column;
+        height: 280px;
+        padding: 35px;
+    }
+}
 .ticket-heading {
     margin-bottom: 15px;
     position: relative;
+}
+@media (min-width: 768px) {
+    .ticket-heading {
+        margin-bottom: auto;
+    }
 }
 .ticket .ticket-heading::after {
     content: "#01609";
@@ -306,6 +322,12 @@ header p span {
     writing-mode: vertical-lr;
     top: 13px;
     right: -10px;
+}
+@media (min-width: 768px) {
+    .ticket .ticket-heading::after {
+        top: 50px;
+        right: -7px;
+    }
 }
 .ticket .ticket-heading h2 {
     display: flex;
@@ -337,6 +359,11 @@ header p span {
     margin: 0;
     font-size: 1.1em;
     font-weight: 500;
+}
+@media (max-width: 767px) {
+    .ticket figcaption h3 {
+        max-width: 205px;
+    }
 }
 .ticket figcaption p {
     margin: 5px 0 0;

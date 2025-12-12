@@ -20,12 +20,22 @@
     </head>
     <body>
         <!-- Start background images -->
-        <div class="background-images">
+        <div class="background-images" role="img">
             <img class="pattern lines" src="assets/images/pattern-lines.svg" />
-            <img class="pattern line-top" src="assets/images/pattern-squiggly-line-top.svg" />
+            <img
+                class="pattern line-top"
+                src="assets/images/pattern-squiggly-line-top.svg"
+            />
             <picture class="pattern line-bottom">
-                <source media="(min-width: 992px)" srcset="assets/images/pattern-squiggly-line-bottom-desktop.svg" />
-                <img src="assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg" />
+                <source
+                    media="(min-width: 992px)"
+                    srcset="
+                        assets/images/pattern-squiggly-line-bottom-desktop.svg
+                    "
+                />
+                <img
+                    src="assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg"
+                />
             </picture>
         </div>
         <!-- End background images -->
@@ -63,31 +73,31 @@
                             </div>
                         </div>
                         <span class="note">
-                            <svg 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                width="16" 
-                                height="16" 
-                                fill="none" 
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="none"
                                 viewBox="0 0 16 16"
                             >
-                                <path 
-                                    stroke="#D1D0D5" 
-                                    stroke-linecap="round" 
-                                    stroke-linejoin="round" 
+                                <path
+                                    stroke="#D1D0D5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
                                     d="M2 8a6 6 0 1 0 12 0A6 6 0 0 0 2 8Z"
                                 />
-                                <path 
-                                    fill="#D1D0D5" 
+                                <path
+                                    fill="#D1D0D5"
                                     d="M8.004 10.462V7.596ZM8 5.57v-.042Z"
                                 />
-                                <path 
-                                    stroke="#D1D0D5" 
-                                    stroke-linecap="round" 
-                                    stroke-linejoin="round" 
+                                <path
+                                    stroke="#D1D0D5"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
                                     d="M8.004 10.462V7.596M8 5.569v-.042"
                                 />
                             </svg>
-                            Upload your photo (JPG or PNG, max size: 500KB).
+                            Upload your photo (JPG or PNG, max size: 3MB).
                         </span>
                     </div>
                     <div class="form-input">
@@ -113,7 +123,11 @@
                         />
                     </div>
                     <div class="form-submit">
-                        <input class="btn" type="submit" value="Generate My Ticket" />
+                        <input
+                            class="btn"
+                            type="submit"
+                            value="Generate My Ticket"
+                        />
                     </div>
                 </form>
             </div>
@@ -128,19 +142,15 @@
                         </h2>
                         <p>Jan 31, 2025 / Online</p>
                     </div>
-                    <div class="ticket-user-info">
-                        <figure>
-                            <img alt="Ticket user" />
-                            <figcaption>
-                                <h3></h3>
-                                <p></p>
-                            </figcaption>
-                        </figure>
-                    </div>
+                    <figure class="ticket-user-info">
+                        <img alt="Ticket user" />
+                        <figcaption>
+                            <h3></h3>
+                            <p></p>
+                        </figcaption>
+                    </figure>
                 </div>
-                <button class="btn">
-                    generate new ticket
-                </button>
+                <button class="btn">generate new ticket</button>
             </div>
         </section>
     </body>
